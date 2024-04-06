@@ -1,6 +1,6 @@
 const Joi = require("@hapi/joi");
 
-module.exports = function user_login_validation(data) {
+const user_login_validation = (data) => {
   const schema = {
     email: Joi.string().required(),
     password: Joi.string().required(),
@@ -8,7 +8,7 @@ module.exports = function user_login_validation(data) {
 
   return Joi.validate(data, schema);
 };
-module.exports = function user_register_validation(data) {
+const user_register_validation = (data) => {
   const schema = {
     name: Joi.required().string().min(4).max(5),
     email: Joi.string().required(),
@@ -18,3 +18,6 @@ module.exports = function user_register_validation(data) {
 
   return Joi.validate(data, schema);
 };
+
+module.exports.user_login_validation = user_login_validation;
+module.exports.user_register_validation = user_register_validation;
