@@ -1,8 +1,11 @@
 const express = require("express");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 const router = require("./routes/router");
 const app = express();
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 mongoose.connect(
   process.env.MongoDBConnect,
@@ -11,7 +14,7 @@ mongoose.connect(
     useUnifiedTopology: true,
   },
   () => {
-    console.log("Database connected");
+    console.log(process.env.MongoDBConnect);
   }
 );
 app.use(express.json());
