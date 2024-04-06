@@ -18,6 +18,11 @@ const user = mongoose.Schema({
     type: String,
     length: 255,
   },
+  bio: {
+    type: String,
+    length: 255,
+    default: null,
+  },
   date: {
     type: Date,
     default: Date.now,
