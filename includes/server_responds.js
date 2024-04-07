@@ -1,3 +1,5 @@
-module.exports = function serverResponds(statusCode, data, res) {
+const serverResponds = (statusCode, data, res) => {
   res.send(data).status(statusCode);
 };
+
+module.exports.serverResponds = serverResponds;

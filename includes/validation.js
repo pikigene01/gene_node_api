@@ -1,22 +1,22 @@
 const Joi = require("@hapi/joi");
 
 const user_login_validation = (data) => {
-  const schema = {
+  const schema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
-  };
+  });
 
-  return Joi.validate(data, schema);
+  return schema.validate(data);
 };
 const user_register_validation = (data) => {
-  const schema = {
-    name: Joi.required().string().min(4).max(5),
+  const schema = Joi.object({
+    name: Joi.string().required().min(4).max(5),
     email: Joi.string().required(),
     password: Joi.string().required(),
     confirm_password: Joi.string().required(),
-  };
+  });
 
-  return Joi.validate(data, schema);
+  return schema.validate(data);
 };
 
 module.exports.user_login_validation = user_login_validation;
