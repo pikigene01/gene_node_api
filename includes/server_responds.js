@@ -1,5 +1,5 @@
 const serverResponds = (statusCode, data, res) => {
-  res.send(data).status(statusCode);
+  return res.status(statusCode).send(data);
 };
 
 module.exports.serverResponds = serverResponds;

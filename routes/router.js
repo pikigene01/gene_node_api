@@ -3,15 +3,12 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const Transaction = require("../models/Transaction");
 const jwt = require("jsonwebtoken");
+const { auth } = require("../includes/middlewares/verifyToken");
 const {
   user_login_validation,
   user_register_validation,
 } = require("../includes/validation");
 const { serverResponds } = require("../includes/server_responds");
-
-router.post("/", (req, res) => {
-  res.send("Server is running..");
-});
 
 router.post("/login", async (req, res) => {
   const { error } = user_login_validation(req.body);
