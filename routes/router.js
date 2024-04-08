@@ -60,12 +60,17 @@ router.post("/register", async (req, res) => {
     confirm_password = req.body.confirm_password;
   const emailExists = await User.findOne({ email });
   if (emailExists) {
-    return serverResponds(404, { message: "User Already Exists" }, res);
+    return serverResponds(
+      404,
+      { status: 404, message: "User Already Exists" },
+      res
+    );
   }
   if (password !== confirm_password) {
     return serverResponds(
       404,
       {
+        status: 404,
         message: "Password amd Confirm Password Do not match!!!",
       },
       res
@@ -80,10 +85,12 @@ router.post("/register", async (req, res) => {
   });
   try {
     const savedUser = await saveUser.save();
+    const token = await jwt.sign({ _id: savedUser?._id }, process.env.TOKEN);
     return res.send({
       status: 200,
       msg: "Data saved successfully",
       user: savedUser,
+      token,
     });
   } catch (error) {
     return res.send(error).status(400);
