@@ -19,6 +19,7 @@ mongoose.connect(
     console.log(process.env.MongoDBConnect);
   }
 );
+// mongoose.set('strictQuery', false);
 app.use(express.json());
 app.use(fileUpload());
 app.use("/api/user", router);

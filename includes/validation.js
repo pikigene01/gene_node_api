@@ -10,7 +10,7 @@ const user_login_validation = (data) => {
 };
 const user_register_validation = (data) => {
   const schema = Joi.object({
-    name: Joi.string().required().min(4).max(5),
+    name: Joi.string().required().min(4).max(20),
     email: Joi.string().required(),
     password: Joi.string().required(),
     confirm_password: Joi.string().required(),

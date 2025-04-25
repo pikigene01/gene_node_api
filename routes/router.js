@@ -100,19 +100,44 @@ router.post("/register", async (req, res) => {
 router.post("/upload", (req, res) => {
   // Check if files were uploaded
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send("No files were uploaded.");
+    return serverResponds(
+      400,
+      {
+        status: 400,
+        message: "No files were uploaded.",
+      },
+      res
+    );
   }
 
   // Access the uploaded file
   const file = req.files.myFile;
+  const fileName = req.files.myFile.name;
+  const splitExt = fileName.split(".")[1];
+  const randomNumber = new Date().getTime().toString();
+  const uploadCombinedName = `${randomNumber}.${splitExt}`;
 
   // Move the file to the desired location
-  file.mv("/path/to/destination/filename.ext", (err) => {
+  file.mv(`./uploads/${uploadCombinedName}`, (err) => {
     if (err) {
-      return res.status(500).send(err);
+      return serverResponds(
+        500,
+        {
+          status: 500,
+          message: err,
+        },
+        res
+      );
     }
 
-    res.send("File uploaded successfully");
+    return serverResponds(
+      200,
+      {
+        status: 200,
+        message: "File uploaded successfully",
+      },
+      res
+    );
   });
 });
 
